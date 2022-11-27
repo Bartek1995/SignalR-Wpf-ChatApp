@@ -121,7 +121,7 @@ namespace WpfApp1.Services
                 LastName = LastName,
                 Password = Password,
                 Role = Role,
-                Id = null
+                //Id = null
             };
 
             var json = JsonSerializer.Serialize(person, serialezerOptions);
