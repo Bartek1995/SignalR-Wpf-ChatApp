@@ -1,43 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using WpfApp1;
-using WpfApp1.ViewModels;
-using System.Windows;
-using System.Windows.Controls;
 
-namespace WpfApp1.Mvvm
+namespace WpfApp1.Mvvm;
+
+public class ViewModelBase : INotifyPropertyChanged
 {
-    public class ViewModelBase : INotifyPropertyChanged
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    protected void OnPropertyChanged(string propertyName)
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+}
+
+public class Command : ICommand
+{
+    private readonly Action _execute;
+
+    public Command(Action execute)
+    {
+        _execute = execute;
     }
 
-    public class Command : ICommand
+    public event EventHandler CanExecuteChanged;
+
+    public bool CanExecute(object parameter)
     {
-        private Action _execute;
+        return true;
+    }
 
-        public event EventHandler CanExecuteChanged;
-
-        public Command(Action execute)
-        {
-            _execute = execute;
-        }
-
-        public bool CanExecute(object parameter)
-        {
-            return true;
-        }
-
-        public void Execute(object parameter)
-        {
-            _execute?.Invoke();
-        }
+    public void Execute(object parameter)
+    {
+        _execute?.Invoke();
     }
 }

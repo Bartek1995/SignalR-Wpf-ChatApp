@@ -1,27 +1,18 @@
-﻿using Models;
-using WpfApp1.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WpfApp1.Services;
-using System.Windows;
-using System.Windows.Input;
+﻿using WpfApp1.Mvvm;
 
-namespace WpfApp1.ViewModels
+namespace WpfApp1.ViewModels;
+
+public class AppViewModel : ViewModelBase
 {
-    public class AppViewModel : ViewModelBase
+    private ViewModelBase _selectedViewModel = new MainWindowViewModel();
+
+    public ViewModelBase selectedViewModel
     {
-        private ViewModelBase _selectedViewModel = new MainWindowViewModel();
-        public ViewModelBase selectedViewModel
+        get => _selectedViewModel;
+        set
         {
-            get { return _selectedViewModel; }
-            set 
-            {
-                _selectedViewModel = value;
-                OnPropertyChanged(nameof(selectedViewModel));
-            }
+            _selectedViewModel = value;
+            OnPropertyChanged(nameof(selectedViewModel));
         }
     }
 }
