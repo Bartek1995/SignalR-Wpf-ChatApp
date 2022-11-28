@@ -22,7 +22,7 @@
         }
     }
 
-    
+
 
     public record User(string login, string password);
 }

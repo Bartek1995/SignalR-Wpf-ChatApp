@@ -1,12 +1,13 @@
 ﻿<UserControl x:Class="WpfApp1.Views.registration"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:components="clr-namespace:WpfApp1.Components"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:components="clr-namespace:WpfApp1.Components"
              mc:Ignorable="d">
     <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
 
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -14,42 +15,42 @@
             <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
-            <Label Content="Imię" x:Name="limie"  Grid.Column="0"  Width="350" Padding="150, 3, 3, 3" Height="35" Margin="5, 20, 5, 5" FontSize="18" FontWeight="Black" />
-            <Label Content="Nazwisko" x:Name="lnazwisko"  Grid.Column="0"  Width="350" Padding="150, 3, 3, 3" Height="35" Margin="5, 10, 5, 5" FontSize="18" FontWeight="Black" />
-            <Label Content="Hasło" x:Name="lhaslo"  Grid.Column="0"  Width="350" Padding="150, 3, 3, 3" Height="35" Margin="5, 10, 5, 5" FontSize="18" FontWeight="Black" />
-            <Label Content="Rola" x:Name="lrola"  Grid.Column="0"  Width="350" Padding="150, 3, 3, 3" Height="35" Margin="5, 10, 5, 5" FontSize="18" FontWeight="Black" />
+            <Label Content="Nazwa" x:Name="lusername" Width="350" Padding="150, 3, 3, 3" Height="35"
+                   Margin="5, 20, 5, 5" FontSize="18" FontWeight="Black" />
+            <Label Content="Hasło" x:Name="lpassword" Width="350" Padding="150, 3, 3, 3" Height="35"
+                   Margin="5, 10, 5, 5" FontSize="18" FontWeight="Black" />
 
         </StackPanel>
         <StackPanel Grid.Column="1">
-            <TextBox x:Name="imie" Text="{Binding NameTxtBox}"  Grid.Column="1" Width="350" Height="40" Margin="5, 20, 5, 5" FontSize="18" FontWeight="Black" />
-
-            <TextBox x:Name="nazwisko" Text="{Binding SurnameTxtBox}" Grid.Column="1" Width="350" Height="40" Margin="5, 5, 5, 5" FontSize="18" FontWeight="Black" />
-            <components:BindablePasswordBox x:Name="haslo" Password="{Binding PasswordTxtBox, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  Grid.Column="1"  Width="350" Height="40" Margin="5, 5, 5, 5" FontSize="18" FontWeight="Black" />
-
-            <ComboBox IsEditable="False" SelectedIndex="0" SelectedItem="{Binding SelectedCombo}" Margin="5,8,5,5" Text="Twoja ocena" HorizontalAlignment="Center" FontWeight="Bold" FontSize="15" Width="160" Name="combo">
-                <ComboBoxItem Content="Uczestnik" HorizontalAlignment="Center"></ComboBoxItem>
-                <ComboBoxItem Content="Juror" HorizontalAlignment="Center"></ComboBoxItem>
-
-            </ComboBox>
+            <TextBox x:Name="username" Text="{Binding NameTxtBox}" Width="350" Height="40" Margin="5, 20, 5, 5"
+                     FontSize="18" FontWeight="Black" />
+            <components:BindablePasswordBox x:Name="password"
+                                            Password="{Binding PasswordTxtBox, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                            Width="350" Height="40" Margin="5, 5, 5, 5" FontSize="18"
+                                            FontWeight="Black" />
 
         </StackPanel>
-        <Button  Grid.Column="1" Template="{DynamicResource ButtonTemplate}" Command="{Binding CreateButton_Click}" Width="350" Height="40" Margin="5, 200, 5, 5" FontSize="18" FontWeight="Bold">Stwórz konto
+        <Button Grid.Column="1" Template="{DynamicResource ButtonTemplate}" Command="{Binding CreateButton_Click}"
+                Width="350" Height="40" Margin="5, 200, 5, 5" FontSize="18" FontWeight="Bold">
+            Stwórz konto
             <Button.Style>
                 <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Foreground" Value="Green"/>
+                            <Setter Property="Foreground" Value="Green" />
                         </Trigger>
                     </Style.Triggers>
                 </Style>
             </Button.Style>
         </Button>
-        <Button Content="Cofnij" Grid.Column="1" Template="{DynamicResource ButtonTemplate}" Command="{Binding ReverseButton}" Width ="350" Height="35" FontSize="18" FontWeight="Bold" Margin="2,280,2,2">
+        <Button Content="Cofnij" Grid.Column="1" Template="{DynamicResource ButtonTemplate}"
+                Command="{Binding ReverseButton}" Width="350" Height="35" FontSize="18" FontWeight="Bold"
+                Margin="2,280,2,2">
             <Button.Style>
                 <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Foreground" Value="Green"/>
+                            <Setter Property="Foreground" Value="Green" />
                         </Trigger>
                     </Style.Triggers>
                 </Style>
@@ -57,4 +58,3 @@
         </Button>
     </Grid>
 </UserControl>
-

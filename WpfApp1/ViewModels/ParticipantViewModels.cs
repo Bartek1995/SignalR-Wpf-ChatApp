@@ -1,57 +1,50 @@
-﻿using System;
+﻿using Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using WpfApp1.Mvvm;
 using System.Windows;
-using System.Windows.Controls;
-using WpfApp1.Services;
-using Microsoft.Win32;
-using Models;
+using WpfApp1.Mvvm;
+using WpfApp1.Properties;
 
-namespace WpfApp1.ViewModels
+namespace WpfApp1.ViewModels;
+
+public class ParticipantViewModels : ViewModelBase
 {
-    public class ParticipantViewModels: ViewModelBase
+    // private IApiService apiService;
+
+
+    public ParticipantViewModels()
     {
-        public Command AddFishButton { get; }
-        public Command LogoutButton { get; }
-        public string RankLabel { get; set; }
+        AddFishButton = new Command(_AddFishButton);
+        LogoutButton = new Command(_LogoutButton);
 
-        private IApiService apiService;
+        RankLabel = "1";
+        //uzupełnić z bazy danych
 
-        public List<Fish> FishList { get; set; }
-        
+        LoadAllFish();
+    }
 
-        public ParticipantViewModels()
-        {
+    public Command AddFishButton { get; }
+    public Command LogoutButton { get; }
+    public string RankLabel { get; set; }
 
-            AddFishButton = new Command(_AddFishButton);
-            LogoutButton = new Command(_LogoutButton);
+    public List<Fish> FishList { get; set; }
 
-            RankLabel = "1";
-            //uzupełnić z bazy danych
+    public async void _AddFishButton()
+    {
+        (Application.Current as App).viewModel.selectedViewModel = new AddFishViewModel();
+    }
 
-            LoadAllFish();
-        }
+    public async void _LogoutButton()
+    {
+        (Application.Current as App).viewModel.selectedViewModel = new MainWindowViewModel();
+    }
 
-        public async void _AddFishButton()
-        {
-            (Application.Current as App).viewModel.selectedViewModel = new AddFishViewModel();
-        }
-
-        public async void _LogoutButton()
-        {
-            (Application.Current as App).viewModel.selectedViewModel = new MainWindowViewModel();
-        }
-
-        public async Task LoadAllFish()
-        {
-            //załaduj ryby bez oceny zamienić na ryby uzytkownika
-            var apiService = new ApiService();
-            FishList = (await apiService.GetAllFish(false, Properties.Settings.Default.UserID)).ToList();
-            OnPropertyChanged(nameof(FishList));
-
-        }
+    public async Task LoadAllFish()
+    {
+        //załaduj ryby bez oceny zamienić na ryby uzytkownika
+        //var apiService = new ApiService();
+        //FishList = (await apiService.GetAllFish(false, Settings.Default.UserID)).ToList();
+        OnPropertyChanged(nameof(FishList));
     }
 }

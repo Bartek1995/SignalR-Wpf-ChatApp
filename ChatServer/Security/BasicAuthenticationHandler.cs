@@ -19,7 +19,7 @@ namespace ChatServer.Security
         protected override Task<AuthenticateResult> HandleAuthenticateAsync()
         {
             var header = Request.Headers["Authorization"].ToString();
-            if(header is null || !header.StartsWith("basic ", StringComparison.OrdinalIgnoreCase))
+            if (header is null || !header.StartsWith("basic ", StringComparison.OrdinalIgnoreCase))
             {
                 Response.StatusCode = 401;
                 Response.Headers.Add("WWW-Authenticate", "Basic");

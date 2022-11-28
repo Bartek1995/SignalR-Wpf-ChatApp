@@ -10,7 +10,7 @@ var url = "http://127.0.0.1:5000/chat";
 var base64 = Convert.ToBase64String("user1:123"u8);
 
 var connection = new HubConnectionBuilder()
-    .WithUrl(url, options=>
+    .WithUrl(url, options =>
     {
         options.Headers.Add("Authorization", $"Bear {base64}");
     })
@@ -35,7 +35,7 @@ await connection.SendAsync("SayHello", username);
 do
 {
     var line = Console.ReadLine();
-    if(line == "/exit")
+    if (line == "/exit")
     {
         return;
     }
