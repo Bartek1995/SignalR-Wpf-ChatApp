@@ -19,14 +19,14 @@ namespace ChatServer.Security
         protected override Task<AuthenticateResult> HandleAuthenticateAsync()
         {
             var header = Request.Headers["Authorization"].ToString();
-            if (header is null || !header.StartsWith("basic ", StringComparison.OrdinalIgnoreCase))
+            if (header is null || !header.StartsWith("Bear ", StringComparison.OrdinalIgnoreCase))
             {
                 Response.StatusCode = 401;
                 Response.Headers.Add("WWW-Authenticate", "Basic");
                 return Task.FromResult(AuthenticateResult.Fail("Missing or invalid header"));
             }
 
-            var token = header[6..];
+            var token = header[5..];
 
             var credentials = Encoding.UTF8.GetString(Convert.FromBase64String(token)).Split(':');
             if (!userService.CheckLogin(credentials[0], credentials[1]))
