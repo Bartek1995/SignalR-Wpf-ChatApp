@@ -9,6 +9,7 @@
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Azure.Storage.Blobs" Version="12.14.1" />
+        <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.1" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.0">
           <PrivateAssets>all</PrivateAssets>
@@ -27,6 +28,8 @@
         <PackageReference Include="Microsoft.Windows.Compatibility" Version="7.0.0" />
     </ItemGroup>
     <ItemGroup>
+        <ProjectReference Include="..\Chat.Models\Chat.Models.csproj" />
+        <ProjectReference Include="..\ConsoleApp1\ConsoleApp1.csproj" />
         <ProjectReference Include="..\Model\Model.csproj" />
         <ProjectReference Include="..\Mvvm\Mvvm.csproj" />
     </ItemGroup>

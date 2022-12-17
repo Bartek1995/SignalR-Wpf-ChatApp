@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpfApp1"
         xmlns:vm="clr-namespace:WpfApp1.ViewModels"
         mc:Ignorable="d"
-        Title="" Height="480" Width="800">
+        Title="" Height="480" Width="1200">
     
     <Grid>
         <ContentControl Content ="{Binding selectedViewModel}" />

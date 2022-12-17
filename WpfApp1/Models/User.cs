@@ -9,6 +9,11 @@ public partial class User
         Role = role;
     }
 
+    public User(string username)
+    {
+        Username = username;
+    }
+
     public User(string username, string password)
     {
         Username = username;

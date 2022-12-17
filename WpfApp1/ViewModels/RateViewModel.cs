@@ -1,5 +1,4 @@
-﻿using Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,13 +6,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Chat.Models;
 using WpfApp1.Mvvm;
 
 namespace WpfApp1.ViewModels;
 
 public class RateViewModel : ViewModelBase
 {
-    private Fish _SelectedFish;
+    // private Fish _SelectedFish;
 
 
     //public RateViewModel(IApiService _apiService)
@@ -30,19 +30,19 @@ public class RateViewModel : ViewModelBase
     public Command LogoutButton_Click { get; }
 
 
-    public List<Fish> FishList { get; set; }
+    public List<Message> Messages { get; set; }
     public ComboBoxItem SelectedRateCombo { get; set; }
 
-    public Fish SelectedFish
-    {
-        get => _SelectedFish;
-        set
-        {
-            _SelectedFish = value;
-            if (_SelectedFish != null) FishImage = new BitmapImage(new Uri(SelectedFish.FishImageLink));
-            OnPropertyChanged(nameof(FishImage));
-        }
-    }
+    // public Fish SelectedFish
+    // {
+    //     get => _SelectedFish;
+    //     set
+    //     {
+    //         _SelectedFish = value;
+    //         if (_SelectedFish != null) FishImage = new BitmapImage(new Uri(SelectedFish.FishImageLink));
+    //         OnPropertyChanged(nameof(FishImage));
+    //     }
+    // }
 
     public ImageSource FishImage { get; set; }
 
@@ -57,21 +57,21 @@ public class RateViewModel : ViewModelBase
     private async void _ReloadButton_Click()
     {
         await LoadAllFish();
-        OnPropertyChanged(nameof(FishList));
+        // OnPropertyChanged(nameof(FishList));
     }
 
     private async void _RateButton_Click()
     {
         //var apiService = new ApiService();
-        FishImage = new BitmapImage(new Uri(SelectedFish.FishImageLink));
+        // FishImage = new BitmapImage(new Uri(SelectedFish.FishImageLink));
         OnPropertyChanged(nameof(FishImage));
 
         var numVal = Convert.ToInt32(SelectedRateCombo.Content);
         //var fishRateResult = await apiService.UpdateFish(SelectedFish, numVal);
-        MessageBox.Show("Wystawiono ocenę " + SelectedRateCombo.Content + " dla ryby " + SelectedFish.Name);
+        // MessageBox.Show("Wystawiono ocenę " + SelectedRateCombo.Content + " dla ryby " + SelectedFish.Name);
 
         await LoadAllFish();
-        OnPropertyChanged(nameof(FishList));
+        // OnPropertyChanged(nameof(FishList));
     }
 
     private async void _LogoutButton_Click()
