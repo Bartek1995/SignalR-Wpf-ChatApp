@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
 using Chat.Models;
@@ -41,17 +43,20 @@ public class ParticipantViewModels : ViewModelBase
     {
         var m = new Message("test", "Testowa wiadomość");
         Messages = new List<Message> { m };
-
-        var connection = new Client().CreateConnection();
+        var client = new Client();
+        var connection = client.CreateConnection();
         
         connection.On<Message>("ReceiveMessage", msg =>
         {
             
-            Console.WriteLine($"{msg.Username}: {msg.Content}");
+            Trace.WriteLine($"{msg.Username}: {msg.Content}");
         });
         
         OnPropertyChanged(nameof(Messages));
     }
+    
+    [DllImport("Kernel32")]
+    public static extern void AllocConsole();
     
     
 }
