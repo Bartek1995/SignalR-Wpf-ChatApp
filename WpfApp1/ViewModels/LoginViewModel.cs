@@ -59,8 +59,8 @@ public class LoginViewModel : ViewModelBase
         {
             PasswordTextBox = hashPassword(PasswordTextBox);
             var user = new User(LoginTextBox, PasswordTextBox);
-            var response = _context.Users.FirstOrDefault(u => u.Username == LoginTextBox);
-            if (response is not null && !CheckHash(response.Password, PasswordTextBox))
+            var response = _context.Users.FirstOrDefault(u => u.Username == LoginTextBox&& u.Password == PasswordTextBox);
+            if (response is null )
             {
                 MessageBox.Show("Błędny login lub hasło");
             }
