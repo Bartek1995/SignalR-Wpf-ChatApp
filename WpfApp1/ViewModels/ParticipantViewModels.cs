@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
 using Chat.Models;
-using ConsoleApp1;
 using Microsoft.AspNetCore.SignalR.Client;
 using WpfApp1.Models;
 using WpfApp1.Mvvm;
-using WpfApp1.Properties;
 
 namespace WpfApp1.ViewModels;
 
@@ -35,19 +27,7 @@ public class ParticipantViewModels : ViewModelBase
             OnPropertyChanged("Messages");
         }
     }
-    //private ObservableCollection<Message> _Messages;
-    //public ObservableCollection<Message> Messages
-    //{
-    //    get { return _Messages; }
-    //    set
-    //    {
-    //        _Messages = value;
-    //        OnPropertyChanged(nameof(Messages));
-    //        OnPropertyChanged(nameof(_Messages));
-    //    }
-    //}
-
-
+    
     public ParticipantViewModels()
     {
         AddFishButton = new Command(_AddFishButton);
@@ -96,12 +76,5 @@ public class ParticipantViewModels : ViewModelBase
 
         await chat_client.hubConnection.SendAsync("SayHello", chat_client.username);
     }
-
-    [DllImport("Kernel32")]
-    public static extern void AllocConsole();
-
-
-
-
-
+    
 }

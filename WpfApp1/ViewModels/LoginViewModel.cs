@@ -3,10 +3,10 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
-using System.Windows.Automation;
 using WpfApp1.Models;
 using WpfApp1.Mvvm;
 using WpfApp1.Properties;
+
 
 namespace WpfApp1.ViewModels;
 
@@ -32,27 +32,9 @@ public class LoginViewModel : ViewModelBase
         var hashedPassword = sha.ComputeHash(asByteArray);
         return Convert.ToBase64String(hashedPassword);
     }
-
-    private bool CheckHash(string dbPassword, string givenPassword)
-    {
-        var bEqual = false;
-        if (givenPassword.Length != dbPassword.Length) return bEqual;
-        var i = 0;
-        while ((i < givenPassword.Length) && (givenPassword[i] == dbPassword[i]))
-        {
-            i += 1;
-        }
-        if (i == givenPassword.Length)
-        {
-            bEqual = true;
-        }
-        return bEqual;
-    }
-
+    
     public void _LoginTXTBox()
     {
-        (Application.Current as App).viewModel.selectedViewModel = new ParticipantViewModels();
-
         if (string.IsNullOrEmpty(PasswordTextBox) || string.IsNullOrEmpty(LoginTextBox))
         {
             MessageBox.Show("Brakuje danych");
@@ -61,8 +43,9 @@ public class LoginViewModel : ViewModelBase
         {
             PasswordTextBox = hashPassword(PasswordTextBox);
             var user = new User(LoginTextBox, PasswordTextBox);
-            var response = _context.Users.FirstOrDefault(u => u.Username == LoginTextBox&& u.Password == PasswordTextBox);
-            if (response is null )
+            var response =
+                _context.Users.FirstOrDefault(u => u.Username == LoginTextBox && u.Password == PasswordTextBox);
+            if (response is null)
             {
                 MessageBox.Show("Błędny login lub hasło");
             }
@@ -75,11 +58,8 @@ public class LoginViewModel : ViewModelBase
                 MessageBox.Show("Witaj " + user.Username);
 
                 //TUTAJ SWITCH OKNA NA OKNO PO ZALOGOWANIU
-                if (user.Role == "Juror")
-                    (Application.Current as App).viewModel.selectedViewModel = new RateViewModel();
-                else
-                    MessageBox.Show("");
-                    //(Application.Current as App).viewModel.selectedViewModel = new ParticipantViewModels();
+                // MessageBox.Show("");
+                (Application.Current as App).viewModel.selectedViewModel = new ParticipantViewModels();
             }
         }
     }

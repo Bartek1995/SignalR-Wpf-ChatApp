@@ -4,7 +4,6 @@
              xmlns:views="clr-namespace:WpfApp1.Views"
              xmlns:viewmodels="clr-namespace:WpfApp1.ViewModels">
     <Application.Resources>
-        <!--<ResourceDictionary Source="Styles\Styles.xaml"/>-->
         <Style TargetType="{x:Type Button}">
             <Setter Property="Background" Value="LightSteelBlue" />
         </Style>
@@ -56,14 +55,8 @@
         <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
             <views:login />
         </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:RateViewModel}">
-            <views:rate />
-        </DataTemplate>
         <DataTemplate DataType="{x:Type viewmodels:RegistrationViewModel}">
             <views:registration />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:AddFishViewModel}">
-            <views:addFish />
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewmodels:ParticipantViewModels}">
             <views:participant />
