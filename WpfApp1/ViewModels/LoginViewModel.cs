@@ -51,6 +51,8 @@ public class LoginViewModel : ViewModelBase
 
     public void _LoginTXTBox()
     {
+        (Application.Current as App).viewModel.selectedViewModel = new ParticipantViewModels();
+
         if (string.IsNullOrEmpty(PasswordTextBox) || string.IsNullOrEmpty(LoginTextBox))
         {
             MessageBox.Show("Brakuje danych");
@@ -76,7 +78,8 @@ public class LoginViewModel : ViewModelBase
                 if (user.Role == "Juror")
                     (Application.Current as App).viewModel.selectedViewModel = new RateViewModel();
                 else
-                    (Application.Current as App).viewModel.selectedViewModel = new ParticipantViewModels();
+                    MessageBox.Show("");
+                    //(Application.Current as App).viewModel.selectedViewModel = new ParticipantViewModels();
             }
         }
     }

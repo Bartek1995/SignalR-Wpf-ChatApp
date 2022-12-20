@@ -53,7 +53,7 @@ public class AddFishViewModel : ViewModelBase
                 if (result)
                 {
                     MessageBox.Show("Ryba została dodana");
-                    (Application.Current as App).viewModel.selectedViewModel = new ParticipantViewModels();
+                    //(Application.Current as App).viewModel.selectedViewModel = new ParticipantViewModels();
                 }
                 else
                 {
@@ -77,6 +77,6 @@ public class AddFishViewModel : ViewModelBase
 
     private async void _BackButton_Click()
     {
-        (Application.Current as App).viewModel.selectedViewModel = new ParticipantViewModels();
+        //(Application.Current as App).viewModel.selectedViewModel = new ParticipantViewModels();
     }
 }
