@@ -58,8 +58,8 @@
         <DataTemplate DataType="{x:Type viewmodels:RegistrationViewModel}">
             <views:registration />
         </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:ParticipantViewModels}">
-            <views:participant />
+        <DataTemplate DataType="{x:Type viewmodels:ChatWindowViewModel}">
+            <views:ChatWindow />
         </DataTemplate>
 
     </Application.Resources>

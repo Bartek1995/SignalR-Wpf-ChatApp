@@ -7,7 +7,7 @@ using WpfApp1.Mvvm;
 
 namespace WpfApp1.ViewModels;
 
-public class ParticipantViewModels : ViewModelBase
+public class ChatWindowViewModel : ViewModelBase
 {
     public SignalRClient chat_client;
     public string LoginTextBox { get; set; }
@@ -28,7 +28,7 @@ public class ParticipantViewModels : ViewModelBase
         }
     }
     
-    public ParticipantViewModels()
+    public ChatWindowViewModel()
     {
         AddFishButton = new Command(_AddFishButton);
         LogoutButton = new Command(_LogoutButton);

@@ -35,6 +35,7 @@ public class LoginViewModel : ViewModelBase
     
     public void _LoginTXTBox()
     {
+        (Application.Current as App).viewModel.selectedViewModel = new ChatWindowViewModel();
         if (string.IsNullOrEmpty(PasswordTextBox) || string.IsNullOrEmpty(LoginTextBox))
         {
             MessageBox.Show("Brakuje danych");
@@ -59,7 +60,6 @@ public class LoginViewModel : ViewModelBase
 
                 //TUTAJ SWITCH OKNA NA OKNO PO ZALOGOWANIU
                 // MessageBox.Show("");
-                (Application.Current as App).viewModel.selectedViewModel = new ParticipantViewModels();
             }
         }
     }

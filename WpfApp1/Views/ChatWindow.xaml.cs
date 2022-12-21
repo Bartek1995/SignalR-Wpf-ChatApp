@@ -5,11 +5,11 @@ using WpfApp1.ViewModels;
 
 namespace WpfApp1.Views;
 
-public partial class participant : UserControl
+public partial class ChatWindow : UserControl
 {
-    public participant()
+    public ChatWindow()
     {
         InitializeComponent();
-        DataContext = new ParticipantViewModels();
+        DataContext = new ChatWindowViewModel();
     }
 }
