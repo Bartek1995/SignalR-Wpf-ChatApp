@@ -8,7 +8,7 @@
         <Label Content="Twoje czaty" HorizontalAlignment="Center" Width="188" Padding="30, 3, 3, 3" Height="35"
                Margin="5, 10, 5, 5" FontSize="22" FontWeight="Black" />
 
-        <ListView Margin="10,10,10,10" ItemsSource="{Binding Messages}"
+        <ListView Margin="10,10,10,10" ItemsSource="{Binding Messages, UpdateSourceTrigger=PropertyChanged}"
                   IsSynchronizedWithCurrentItem="True"
                   Name="MessagesView" HorizontalAlignment="Center" VerticalAlignment="Top" Width="1000" Height="230">
             <ListView.ItemTemplate>
@@ -26,9 +26,9 @@
         </ListView>
 
 
-        <TextBox x:Name="slogin" Width="350" Text="{Binding LoginTextBox, Mode=TwoWay}" Height="40" Margin="5, 5, 5, 5"
+        <TextBox x:Name="slogin" Width="350" Text="{Binding TextOfMessage, Mode=TwoWay}" Height="40" Margin="5, 5, 5, 5"
                  FontSize="18" FontWeight="Black" />
-        <Button Content="Dodaj wiadomość" Template="{DynamicResource ButtonTemplate}" Command="{Binding AddFishButton}"
+        <Button Content="Wyślij wiadomość" Template="{DynamicResource ButtonTemplate}" Command="{Binding SendMessageButton}"
                 Width="350" Height="35" FontSize="20" FontWeight="Bold" Margin="2,2,2,2">
             <Button.Style>
                 <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">

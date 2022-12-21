@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
 using Chat.Models;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -10,71 +10,69 @@ namespace WpfApp1.ViewModels;
 public class ChatWindowViewModel : ViewModelBase
 {
     public SignalRClient chat_client;
-    public string LoginTextBox { get; set; }
-    //public List<Message> Messages = new List<Message>();
-    //public List<Message> Messages { get; set; } = new List<Message>();
-    //public ObservableCollection<Message> Messages { get; set; } = new ObservableCollection<Message>();
-    private List<Message> _Messages;
-    public List<Message> Messages
+    public string TextOfMessage { get; set; }
+    private ObservableCollection<Message> _Messages = new ObservableCollection<Message>();
+    public ObservableCollection<Message> Messages
     {
-        get
-        {
-            return _Messages;
-        }
+        get { return _Messages; }
+
         set
         {
-            _Messages = value;
             OnPropertyChanged("Messages");
         }
     }
-    
+
+
     public ChatWindowViewModel()
     {
-        AddFishButton = new Command(_AddFishButton);
+        SendMessageButton = new Command(_SendMessageButton);
         LogoutButton = new Command(_LogoutButton);
         chat_client = new SignalRClient("user1", "123");
-        PrepareMessages();
+
+        chat_client.hubConnection.On<Message>("ReceiveMessage", msg =>
+        {
+            App.Current.Dispatcher.Invoke((System.Action)delegate
+            {
+                Messages.Add(msg);
+             });
+        });
+
+        chat_client.hubConnection.On<string>("HelloMessage", user =>
+        {
+            App.Current.Dispatcher.Invoke((System.Action)delegate
+            {
+            Messages.Add(new Message(user, "Dołącza do czatu"));
+            });
+        });
+
+        chat_client.hubConnection.StartAsync();
+
+        chat_client.hubConnection.SendAsync("SayHello", chat_client.username);
+
     }
 
-    public Command AddFishButton { get; }
+    public Command SendMessageButton { get; }
     public Command LogoutButton { get; }
 
-    public async void _AddFishButton()
-    {
+    public async void _SendMessageButton()
+    {   if (TextOfMessage is not null)
+        { 
+            App.Current.Dispatcher.Invoke((System.Action)delegate
+            {
+                Messages.Add(new Message(chat_client.username, TextOfMessage));
+            });
+            TextOfMessage = null;
+            OnPropertyChanged(nameof(TextOfMessage));
+        }
+        else { 
+            MessageBox.Show("Podaj treść wiadomości"); 
+        }
 
-        OnPropertyChanged(nameof(Messages));
     }
 
     public async void _LogoutButton()
     {
         (Application.Current as App).viewModel.selectedViewModel = new MainWindowViewModel();
     }
-
-    public async void PrepareMessages()
-    {
-        var m = new Message("test", "Testowa wiadomość");
-        Messages = new List<Message>();
-        Messages.Add(m);
-        Messages.Add(new Message("fasdfas", "fsdfsd"));
-
-        chat_client.hubConnection.On<Message>("ReceiveMessage", msg =>
-        {
-            string message = $"{msg.Username}: {msg.Content}";
-            MessageBox.Show($"{msg.Username}: {msg.Content}");
-            Messages.Add(msg);
-            OnPropertyChanged(nameof(Messages));
-        });
-
-        chat_client.hubConnection.On<string>("HelloMessage", msg =>
-        {
-            MessageBox.Show($"User {msg} joined chat");
-            //Messages.Add(msg);
-            OnPropertyChanged(nameof(Messages));
-        });
-
-        await chat_client.hubConnection.StartAsync();
-
-        await chat_client.hubConnection.SendAsync("SayHello", chat_client.username);
-    }
-    
+   
 }
