@@ -1,17 +1,20 @@
-﻿namespace ChatServer.Services
+﻿using WpfApp1.Models;
+using Chat.Models;
+
+namespace ChatServer.Services
 {
     public class UserService
     {
-        private readonly List<User> logins;
+        private CsharpdbContext _context = new();
+        private readonly List<User> logins = new List<User>();
         public UserService()
         {
-            logins = new()
+            var users = _context.Users.ToList();
+            foreach (var user in users)
             {
-                new User("admin", "admin"),
-                new User("user1", "123"),
-                new User("user2", "456"),
-                new User("user3", "789")
-            };
+                logins.Add(new User(user.Username, user.Password));
+            }
+            logins.Add(new User("admin", "admin"));
         }
         public bool CheckLogin(string login, string password)
         {

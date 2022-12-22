@@ -5,7 +5,7 @@ Console.Write("Enter username: ");
 var username = Console.ReadLine();
 
 var url = "http://127.0.0.1:5000/chat";
-var base64 = Convert.ToBase64String("user1:123"u8);
+var base64 = Convert.ToBase64String("admin:admin"u8);
 var connection = new HubConnectionBuilder()
     .WithUrl(url, options =>
     {

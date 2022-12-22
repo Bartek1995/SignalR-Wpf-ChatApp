@@ -5,6 +5,7 @@ using System.Windows;
 using WpfApp1.Models;
 using WpfApp1.Mvvm;
 
+
 namespace WpfApp1.ViewModels;
 
 public class RegistrationViewModel : ViewModelBase
@@ -44,7 +45,6 @@ public class RegistrationViewModel : ViewModelBase
             var user = new User(NameTxtBox, PasswordTxtBox, null);
             var result = _context.Users.Add(user);
             _context.SaveChanges();
-            Console.WriteLine(result);
 
             if (result.IsKeySet)
                 (Application.Current as App).viewModel.selectedViewModel = new MainWindowViewModel();

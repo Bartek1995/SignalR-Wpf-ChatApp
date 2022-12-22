@@ -12,7 +12,7 @@ namespace WpfApp1.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.2.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.4.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -61,9 +61,9 @@ namespace WpfApp1.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("DefaultEndpointsProtocol=https;AccountName=storageforfishapp;AccountKey=iJLkTArOZ" +
-            "eBCHKE6WBPP91h5hBcHYBJlgxxt9BUpCzv7UWKoVvJz++jLDbuSqBaTTNKHoQtzVF1n+AStVrk5RQ==;" +
-            "EndpointSuffix=core.windows.net")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\r\n                DefaultEndpointsProtocol=https;AccountName=storageforfishapp;Ac" +
+            "countKey=iJLkTArOZeBCHKE6WBPP91h5hBcHYBJlgxxt9BUpCzv7UWKoVvJz++jLDbuSqBaTTNKHoQt" +
+            "zVF1n+AStVrk5RQ==;EndpointSuffix=core.windows.net\r\n            ")]
         public string BLOBconnectionString {
             get {
                 return ((string)(this["BLOBconnectionString"]));
@@ -75,13 +75,25 @@ namespace WpfApp1.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("fishtank")]
-        public string BLOBcontainerName {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string username {
             get {
-                return ((string)(this["BLOBcontainerName"]));
+                return ((string)(this["username"]));
             }
             set {
-                this["BLOBcontainerName"] = value;
+                this["username"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string password {
+            get {
+                return ((string)(this["password"]));
+            }
+            set {
+                this["password"] = value;
             }
         }
     }

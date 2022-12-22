@@ -11,6 +11,9 @@
       <Compile Remove="ViewModels\ParticipantViewModels - kopiować.cs" />
     </ItemGroup>
     <ItemGroup>
+      <None Include="..\.editorconfig" Link=".editorconfig" />
+    </ItemGroup>
+    <ItemGroup>
         <PackageReference Include="Azure.Storage.Blobs" Version="12.14.1" />
         <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.1" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />

@@ -35,32 +35,26 @@ public class LoginViewModel : ViewModelBase
     
     public void _LoginTXTBox()
     {
-        (Application.Current as App).viewModel.selectedViewModel = new ChatWindowViewModel();
+        PasswordTextBox = hashPassword(PasswordTextBox);
+
         if (string.IsNullOrEmpty(PasswordTextBox) || string.IsNullOrEmpty(LoginTextBox))
         {
             MessageBox.Show("Brakuje danych");
         }
         else
         {
-            PasswordTextBox = hashPassword(PasswordTextBox);
-            var user = new User(LoginTextBox, PasswordTextBox);
-            var response =
-                _context.Users.FirstOrDefault(u => u.Username == LoginTextBox && u.Password == PasswordTextBox);
-            if (response is null)
+            var user = _context.Users.FirstOrDefault(user => user.Username == LoginTextBox && user.Password == PasswordTextBox);
+            if (user is not null)
             {
-                MessageBox.Show("Błędny login lub hasło");
+                SignalRClient client = new SignalRClient(LoginTextBox, PasswordTextBox);
+                (Application.Current as App).viewModel.selectedViewModel = new ChatWindowViewModel(client);
             }
             else
             {
-                Settings.Default.IsLogedIn = true;
-                Settings.Default.UserID = Convert.ToInt32(user.Id);
-                Settings.Default.UserRole = user.Role;
-
-                MessageBox.Show("Witaj " + user.Username);
-
-                //TUTAJ SWITCH OKNA NA OKNO PO ZALOGOWANIU
-                // MessageBox.Show("");
+                MessageBox.Show("Nieprawidłowy login lub hasło");
             }
+                
+
         }
     }
 
